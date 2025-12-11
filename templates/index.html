@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Add todo {% endblock %}
+
+{% block body %}
+<div class="content" >
+    <h1 style="text-align: center;">task master</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center;">there are no tasks . create one below </h4>
+    {% else %}
+        <table border="1px"  >
+            <tr>
+                <th>id</th>
+                <th>task</th>
+                <th>added</th>
+                <th>action</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.id}}</td>
+                <td>{{task.content}}</td>
+                <td>{{task.timestamp.date()}}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <form action="/" method="post">
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Add task">
+    </form>
+</div>
+
+
+{% endblock %}
